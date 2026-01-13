@@ -50,10 +50,7 @@ class MerchantController extends Controller
 
     public function update(Request $request, Merchant $merchant)
     {
-        $user = $request->user();
-        if ($user->id !== $merchant->owner_id) {
-            return response()->json(['message' => 'Forbidden'], 403);
-        }
+        $this->authorize('update', $merchant);
 
         $data = $request->validate([
             'name' => 'sometimes|string|max:255',
@@ -69,10 +66,8 @@ class MerchantController extends Controller
 
     public function destroy(Request $request, Merchant $merchant)
     {
-        $user = $request->user();
-        if ($user->id !== $merchant->owner_id) {
-            return response()->json(['message' => 'Forbidden'], 403);
-        }
+        $this->authorize('delete', $merchant);
+
         $merchant->delete();
         return response()->json(null, 204);
     }

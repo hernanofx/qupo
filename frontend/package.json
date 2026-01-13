@@ -19,4 +19,5 @@
     "eslint": "^8.0.0",
     "vite-plugin-pwa": "^0.13.0"
   }
+
 }
