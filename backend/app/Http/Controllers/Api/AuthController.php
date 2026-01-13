@@ -23,9 +23,12 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => $data['password'],
+            'password' => Hash::make($data['password']),
             'role' => 'merchant',
         ]);
+
+        // send verification email
+        $user->sendEmailVerificationNotification();
 
         $merchant = Merchant::create([
             'owner_id' => $user->id,
