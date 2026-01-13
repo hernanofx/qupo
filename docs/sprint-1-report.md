@@ -21,8 +21,9 @@ Periodo: Sprint inicial (configuración y MVP backend + frontend shell)
   - Stripe Checkout endpoint (`/api/v1/payments/checkout`) y webhook handler (`/api/v1/payments/webhook`).
   - Email verification dispatched on register; `Mail` settings documented in `.env.example` (Mailhog/log).
 - Frontend:
-  - React (Vite) scaffold con páginas: Register, Login, MerchantDashboard. Migrated to TypeScript (.tsx) and typed API helper.
-  - `src/api.ts` helper for API calls; added `tsconfig.json` and TypeScript dev dependencies.
+  - React (Vite) scaffold con páginas: Register, Login, MerchantDashboard.
+  - Migrated to TypeScript: `src/*.tsx` + `src/api.ts` helper; added `tsconfig.json` and TypeScript dev dependencies.
+  - Minimal, high-quality UI styles in `src/styles.css`, favicon (`/favicon.svg` and `/favicon.ico`), and token persistence (localStorage).
 - Tests:
   - `MerchantAuthTest`, `MerchantVerificationTest`, `MerchantPolicyTest`, `BookingTest`, `PaymentsWebhookTest` (todos pasan localmente).
 
