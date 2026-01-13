@@ -11,6 +11,11 @@ export default function Register(){
     e.preventDefault()
     const res = await api.registerMerchant(form)
     setMsg(JSON.stringify(res))
+    if(res?.token){
+      // auto-store token if returned
+      localStorage.setItem('qupo_token', res.token)
+      localStorage.setItem('qupo_user', JSON.stringify(res.user || {}))
+    }
   }
 
   return (

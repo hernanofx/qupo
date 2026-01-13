@@ -21,5 +21,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Seed developer account for local dev
+        $this->call([\Database\Seeders\HernanUserSeeder::class]);
     }
 }

@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import api from '../api'
 
-interface LoginProps { onLogin?: (res: any) => void }
+interface LoginProps { onLogin?: (res: { token?: string; user?: { name?: string } }) => void }
 interface LoginForm { email: string; password: string }
 
+import { useNavigate } from 'react-router-dom'
+
 export default function Login({onLogin}: LoginProps){
+  const navigate = useNavigate()
   const [form, setForm] = useState<LoginForm>({email:'', password:''})
   const [msg, setMsg] = useState<string | null>(null)
 
@@ -13,7 +16,10 @@ export default function Login({onLogin}: LoginProps){
     const res = await api.login(form)
     setMsg(JSON.stringify(res))
     if(res.token){
-      onLogin && onLogin(res)
+      localStorage.setItem('qupo_token', res.token)
+      localStorage.setItem('qupo_user', JSON.stringify(res.user || {}))
+      onLogin?.(res)
+      navigate('/dashboard')
     }
   }
 
