@@ -19,3 +19,4 @@ Cambios recientes:
 - CI actualizado para habilitar `pdo_sqlite` y ejecutar `php artisan test` en el job de backend.
 - Sprint 1 añadido en `docs/sprint-1.md`.
 - Documento `docs/setup-local.md` añadido con pasos para levantar el entorno local.
+- Repositorio remoto añadido: `https://github.com/hernanofx/qupo.git` y rama `master` empujada al remoto (tracking configurado).
