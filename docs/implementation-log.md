@@ -20,3 +20,6 @@ Cambios recientes:
 - Sprint 1 añadido en `docs/sprint-1.md`.
 - Documento `docs/setup-local.md` añadido con pasos para levantar el entorno local.
 - Repositorio remoto añadido: `https://github.com/hernanofx/qupo.git` y rama `master` empujada al remoto (tracking configurado).
+- Implementada autenticación básica con Sanctum, migraciones y tabla `personal_access_tokens`.
+- Creado modelo `Merchant` con migration y CRUD básico y pruebas (`MerchantAuthTest`).
+- Añadido endpoint de pago (Stripe Checkout session) y SDK (`stripe/stripe-php`).
