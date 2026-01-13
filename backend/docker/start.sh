@@ -56,6 +56,12 @@ LOG_LEVEL=${LOG_LEVEL:-info}
 MAIL_MAILER=log
 EOF
   echo ".env generated from DATABASE_URL"
+
+  # Clear and warm config cache so Laravel picks up new .env values
+  echo "Clearing config cache..."
+  php artisan config:clear || echo "config:clear failed"
+  echo "Caching config..."
+  php artisan config:cache || echo "config:cache failed"
 fi
 
 # Set default APP_URL if not provided
