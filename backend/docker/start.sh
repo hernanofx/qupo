@@ -1,6 +1,12 @@
 #!/usr/bin/env sh
 set -e
 
+# Set default APP_URL if not provided
+if [ -z "$APP_URL" ] || [ "$APP_URL" = "https://<BE_RAILWAY_DOMAIN>" ]; then
+  APP_URL="http://localhost:${PORT:-8000}"
+  export APP_URL
+fi
+
 # Wait for DB (simple loop)
 if [ -n "$DATABASE_URL" ]; then
   echo "DATABASE_URL detected, proceeding to migrate"
