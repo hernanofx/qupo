@@ -1,5 +1,5 @@
 type _IM = { env: { VITE_API_URL?: string } }
-const API_BASE: string = ((import.meta as unknown) as _IM).env.VITE_API_URL || 'http://localhost:8000/api/v1';
+const API_BASE: string = ((import.meta as unknown) as _IM).env.VITE_API_URL || '/api/v1';
 
 async function postJson<T = unknown>(path: string, body: unknown, token?: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
