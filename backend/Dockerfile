@@ -12,4 +12,8 @@ COPY --from=composer:2.5 /usr/bin/composer /usr/bin/composer
 COPY . /var/www
 RUN composer install --no-dev --prefer-dist --no-interaction
 
-CMD ["php-fpm"]
+# Add start script
+COPY docker/start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
+
+CMD ["/usr/local/bin/start.sh"]
