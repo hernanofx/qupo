@@ -1,0 +1,30 @@
+# Node
+node_modules/
+.env
+
+# PHP
+/vendor
+/.env
+.phpunit.result.cache
+
+# Composer
+composer.lock
+
+# Vite / build
+/dist
+/build
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Docker
+docker-compose.override.yml
+
+# IDE
+.vscode/
+.idea/
