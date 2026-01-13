@@ -1,6 +1,7 @@
-const API_BASE: string = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+type _IM = { env: { VITE_API_URL?: string } }
+const API_BASE: string = ((import.meta as unknown) as _IM).env.VITE_API_URL || 'http://localhost:8000/api/v1';
 
-async function postJson<T = any>(path: string, body: any, token?: string): Promise<T> {
+async function postJson<T = unknown>(path: string, body: unknown, token?: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
     method: 'POST',
     headers: {
@@ -9,14 +10,14 @@ async function postJson<T = any>(path: string, body: any, token?: string): Promi
     },
     body: JSON.stringify(body),
   });
-  return res.json();
+  return res.json() as Promise<T>;
 }
 
-export async function registerMerchant(payload: any) {
+export async function registerMerchant(payload: unknown) {
   return postJson('/merchant/register', payload);
 }
 
-export async function login(payload: any) {
+export async function login(payload: unknown) {
   return postJson('/merchant/login', payload);
 }
 
@@ -25,19 +26,19 @@ export async function fetchMerchants() {
   return res.json();
 }
 
-export async function createMerchant(payload: any, token?: string) {
+export async function createMerchant(payload: unknown, token?: string) {
   return postJson('/merchants', payload, token);
 }
 
-export async function createService(payload: any, token?: string) {
+export async function createService(payload: unknown, token?: string) {
   return postJson('/services', payload, token);
 }
 
-export async function createBooking(payload: any, token?: string) {
+export async function createBooking(payload: unknown, token?: string) {
   return postJson('/bookings', payload, token);
 }
 
-export async function createCheckout(payload: any, token?: string) {
+export async function createCheckout(payload: unknown, token?: string) {
   return postJson('/payments/checkout', payload, token);
 }
 

@@ -1,15 +1,18 @@
+/// <reference lib="webworker" />
 // Service worker stub - use Workbox or vite-plugin-pwa for production
 // Kept minimal and typed for TypeScript
-declare const self: ServiceWorkerGlobalScope;
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-self.addEventListener('install', (event: ExtendableEvent) => {
-  self.skipWaiting()
+const sw: any = self;
+
+sw.addEventListener('install', (event: any) => {
+  event.waitUntil(sw.skipWaiting())
 })
 
-self.addEventListener('activate', (event: ExtendableEvent) => {
-  (self as any).clients.claim()
+sw.addEventListener('activate', (event: any) => {
+  event.waitUntil(sw.clients.claim())
 })
 
-self.addEventListener('fetch', (event: FetchEvent) => {
+sw.addEventListener('fetch', () => {
   // Implement caching strategies (Stale-While-Revalidate)
 })
