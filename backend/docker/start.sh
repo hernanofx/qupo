@@ -71,10 +71,17 @@ if [ -z "$APP_URL" ] || [ "$APP_URL" = "https://<BE_RAILWAY_DOMAIN>" ]; then
 fi
 
 # Run migrations with verbose output
+echo "Running migrate:status..."
+php artisan migrate:status --verbose || echo "migrate:status failed"
+
 echo "Running migrations..."
 php artisan migrate --force --verbose || {
   echo "Migration failed, attempting to continue..."
 }
+
+# Show database tables using PDO (for debugging)
+echo "Checking DB tables via PDO..."
+php -r "try { $pdo = new PDO('pgsql:host=' . getenv('DB_HOST') . ';port=' . getenv('DB_PORT') . ';dbname=' . getenv('DB_DATABASE'), getenv('DB_USERNAME'), getenv('DB_PASSWORD')); $stmt = $pdo->query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'"); $rows = $stmt->fetchAll(PDO::FETCH_COLUMN); echo 'tables: ' . implode(',', $rows) . PHP_EOL; } catch (Exception $e) { echo 'pdo error: ' . $e->getMessage() . PHP_EOL; }"
 
 # Run seeder with verbose output
 echo "Seeding database..."
