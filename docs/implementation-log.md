@@ -9,6 +9,13 @@ Registro de acciones realizadas por el asistente al iniciar el proyecto QUPO.
 - Añadido `infra/docker-compose.yml` y `docs/` con plan y backlog inicial.
 
 Siguientes pasos:
-- Instalar Laravel en `backend/` (composer) y configurar conexión a DB.
+- Instalar Laravel en `backend/` (composer) y configurar conexión a DB. ✅ (instalado)
 - Implementar primera API (auth + merchant onboarding).
-- Configurar GitHub Actions con jobs de build/test.
+- Configurar GitHub Actions con jobs de build/test. ✅ (actualizado para ejecutar tests de backend)
+
+Cambios recientes:
+- Laravel instalado en `backend/` y archivos base añadidos.
+- Ruta `/health` añadida en `routes/web.php` y prueba `HealthTest` creada y pasada localmente.
+- CI actualizado para habilitar `pdo_sqlite` y ejecutar `php artisan test` en el job de backend.
+- Sprint 1 añadido en `docs/sprint-1.md`.
+- Documento `docs/setup-local.md` añadido con pasos para levantar el entorno local.
