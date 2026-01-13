@@ -27,9 +27,11 @@ Arrancar el entorno de desarrollo (docker-compose - desarrollo simple):
 4. Frontend:
 
    - `cd frontend`
-   - `npm ci`
+   - `npm install` (instalará TypeScript y tipos dev; or `npm ci` if you prefer reproducible installs and have a lockfile)
    - `npm run dev`
+   - Optional: `npm run type-check` to run `tsc --noEmit` for type checks
 
 Notas:
 - Para desarrollo en host puede preferirse `docker-compose` con volúmenes montados.
 - Los tests usan SQLite en memoria cuando se ejecutan en CI/local.
+- The frontend was migrated to TypeScript (.tsx) — ensure your editor supports TS/TSX.

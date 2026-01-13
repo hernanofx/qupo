@@ -4,7 +4,7 @@ Registro de acciones realizadas por el asistente al iniciar el proyecto QUPO.
 
 - Inicializada estructura del repo y archivos base (README, .gitignore, .editorconfig).
 - Agregado CI stub en `.github/workflows/ci.yml`.
-- Scaffolding frontend (Vite/React): `frontend/` con `src/`, `index.html`, `package.json`, PWA stubs.
+- Scaffolding frontend (Vite/React): `frontend/` con `src/`, `index.html`, `package.json`, PWA stubs. Migrated frontend to TypeScript (.tsx) and added `tsconfig.json`; updated `package.json` to include `typescript` and `@types/*` dev dependencies.
 - Scaffolding backend: `backend/` con `Dockerfile`, `.env.example`, `docker-compose.yml`.
 - Añadido `infra/docker-compose.yml` y `docs/` con plan y backlog inicial.
 
