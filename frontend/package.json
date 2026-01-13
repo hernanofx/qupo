@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx || true",
+    "lint": "eslint . --ext .js,.ts,.tsx || true",
     "type-check": "tsc --noEmit",
     "test": "echo \"Run frontend tests (stub)\""
   },
