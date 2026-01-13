@@ -4,11 +4,10 @@ set -e
 # Generate APP_KEY first if not set
 if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:YOUR_KEY_HERE" ]; then
   echo "Generating APP_KEY..."
-  php artisan key:generate
-  # Read the generated key from .env if it exists
-  if [ -f "/var/www/.env" ]; then
-    APP_KEY=$(grep '^APP_KEY=' /var/www/.env | cut -d '=' -f 2-)
-  fi
+  # Generate a base64-encoded 32-byte random key
+  APP_KEY="base64:$(head -c 32 /dev/urandom | base64)"
+  export APP_KEY
+  echo "Generated APP_KEY: $APP_KEY"
 fi
 
 # Parse DATABASE_URL if provided (format: postgresql://user:pass@host:port/database)
