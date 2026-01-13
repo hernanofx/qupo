@@ -1,6 +1,16 @@
 #!/usr/bin/env sh
 set -e
 
+# Generate APP_KEY first if not set
+if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:YOUR_KEY_HERE" ]; then
+  echo "Generating APP_KEY..."
+  php artisan key:generate
+  # Read the generated key from .env if it exists
+  if [ -f "/var/www/.env" ]; then
+    APP_KEY=$(grep '^APP_KEY=' /var/www/.env | cut -d '=' -f 2-)
+  fi
+fi
+
 # Parse DATABASE_URL if provided (format: postgresql://user:pass@host:port/database)
 if [ -n "$DATABASE_URL" ]; then
   echo "DATABASE_URL detected, parsing connection parameters"
@@ -53,12 +63,6 @@ fi
 if [ -z "$APP_URL" ] || [ "$APP_URL" = "https://<BE_RAILWAY_DOMAIN>" ]; then
   APP_URL="http://localhost:${PORT:-8000}"
   export APP_URL
-fi
-
-# Generate app key if not exists
-if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:YOUR_KEY_HERE" ]; then
-  echo "Generating APP_KEY..."
-  php artisan key:generate
 fi
 
 # Run migrations with verbose output
