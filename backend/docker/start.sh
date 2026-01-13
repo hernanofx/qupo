@@ -81,7 +81,7 @@ php artisan migrate --force --verbose || {
 
 # Show database tables using PDO (for debugging)
 echo "Checking DB tables via PDO..."
-php -r "try { $pdo = new PDO('pgsql:host=' . getenv('DB_HOST') . ';port=' . getenv('DB_PORT') . ';dbname=' . getenv('DB_DATABASE'), getenv('DB_USERNAME'), getenv('DB_PASSWORD')); $stmt = $pdo->query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'"); $rows = $stmt->fetchAll(PDO::FETCH_COLUMN); echo 'tables: ' . implode(',', $rows) . PHP_EOL; } catch (Exception $e) { echo 'pdo error: ' . $e->getMessage() . PHP_EOL; }"
+php -r 'try { $pdo = new PDO("pgsql:host=".getenv("DB_HOST").";port=".getenv("DB_PORT").";dbname=".getenv("DB_DATABASE"), getenv("DB_USERNAME"), getenv("DB_PASSWORD")); $stmt = $pdo->query("SELECT table_name FROM information_schema.tables WHERE table_schema=\'public\'"); $rows = $stmt->fetchAll(PDO::FETCH_COLUMN); echo "tables: ".implode(",",$rows).PHP_EOL; } catch (Exception $e) { echo "pdo error: ".$e->getMessage().PHP_EOL; }' || echo "pdo check failed"
 
 # Run seeder with verbose output
 echo "Seeding database..."
