@@ -79,9 +79,20 @@ php artisan migrate --force --verbose || {
   echo "Migration failed, attempting to continue..."
 }
 
-# Show database tables using PDO (for debugging)
-echo "Checking DB tables via PDO..."
-php -r 'try { $pdo = new PDO("pgsql:host=".getenv("DB_HOST").";port=".getenv("DB_PORT").";dbname=".getenv("DB_DATABASE"), getenv("DB_USERNAME"), getenv("DB_PASSWORD")); $stmt = $pdo->query("SELECT table_name FROM information_schema.tables WHERE table_schema=\'public\'"); $rows = $stmt->fetchAll(PDO::FETCH_COLUMN); echo "tables: ".implode(",",$rows).PHP_EOL; } catch (Exception $e) { echo "pdo error: ".$e->getMessage().PHP_EOL; }' || echo "pdo check failed"
+# Show database tables using a temporary PHP script (safer quoting)
+echo "Checking DB tables via PDO (temp PHP script)..."
+cat > /tmp/check_tables.php <<'PHP'
+<?php
+try {
+    $pdo = new PDO('pgsql:host='.getenv('DB_HOST').';port='.getenv('DB_PORT').';dbname='.getenv('DB_DATABASE'), getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
+    $stmt = $pdo->query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'");
+    $rows = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    echo 'tables: ' . implode(',', $rows) . PHP_EOL;
+} catch (Exception $e) {
+    echo 'pdo error: ' . $e->getMessage() . PHP_EOL;
+}
+PHP
+php /tmp/check_tables.php || echo "pdo script failed"
 
 # Run seeder with verbose output
 echo "Seeding database..."
