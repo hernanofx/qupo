@@ -11,8 +11,7 @@ Route::get('/health', function () {
     return response()->json(['status' => 'ok']);
 });
 
-// Load api routes (some Laravel skeletons may not autoload routes/api.php)
-$apiRoutes = __DIR__ . '/api.php';
-if (file_exists($apiRoutes)) {
-    require $apiRoutes;
-}
+// `routes/api.php` is registered by the AppServiceProvider under the `api` middleware group to
+// ensure API routes remain stateless and are not wrapped by the `web` middleware (which enforces CSRF).
+// If you need to register extra web-only routes, add them here.
+

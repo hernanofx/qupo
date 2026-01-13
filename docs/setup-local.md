@@ -20,9 +20,14 @@ Arrancar el entorno de desarrollo (docker-compose - desarrollo simple):
 
    - `cd backend`
    - `composer install`
+   - Update `.env` to use Postgres (set `DB_CONNECTION=pgsql` or set `DATABASE_URL`)
    - `php artisan key:generate`
-   - `php artisan migrate`
+   - `php artisan migrate --force`
+   - `php artisan db:seed --class=HernanUserSeeder` (creates `hernan@hernan.com` / `12345678`)
    - `php artisan test` (ejecutar tests)
+
+Notes:
+- The project now defaults to PostgreSQL for local and staging; update `DATABASE_URL` in `.env` with your connection string if you prefer that method.
 
 4. Frontend:
 
